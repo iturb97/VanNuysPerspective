@@ -1,0 +1,28 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class CrosshairController : MonoBehaviour
+{
+    public Image crosshairImage;
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    public void SetColor(Color color)
+    {
+        crosshairImage.color = color;
+    }
+
+    public void SetVisible(bool visible)
+    {
+        crosshairImage.gameObject.SetActive(visible);
+    }
+}
