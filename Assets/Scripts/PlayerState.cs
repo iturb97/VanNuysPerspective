@@ -1,6 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using static UnityEngine.Debug;
 
 
 public class PlayerState : MonoBehaviour
@@ -11,6 +11,7 @@ public class PlayerState : MonoBehaviour
     public float currentStamina;
     public float staminaDepletionRate = 20f;
     public float staminaRegenRate = 10f;
+    public float minStamina = 20f;
 
     public bool isSprinting;
     
@@ -31,7 +32,7 @@ public class PlayerState : MonoBehaviour
     void Update()
     {
         
-        if (isSprinting && currentStamina > 0f)
+        if (isSprinting && currentStamina > minStamina)
         {
             currentStamina -= staminaDepletionRate * Time.deltaTime;
             
@@ -43,6 +44,9 @@ public class PlayerState : MonoBehaviour
         }
         
         currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
+
+        int displayStamina = Mathf.RoundToInt(currentStamina);
+        Log(displayStamina);
     }
 
     private void OnTriggerEnter(Collider other)
