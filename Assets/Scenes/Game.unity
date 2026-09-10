@@ -939,12 +939,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3f5b14c511e4ad2ae36cec07b772a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  movementSpeed: 1
+  movementSpeed: 10
   rotationSpeed: 100
-  gravity: -9.18
+  gravity: -9.81
   groundStickForce: -5
   sprintMultiplier: 1.5
-  playerState: {fileID: 0}
+  playerState: {fileID: 790409078}
 --- !u!114 &790409078
 MonoBehaviour:
   m_ObjectHideFlags: 0

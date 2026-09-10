@@ -16,6 +16,8 @@ public class PlayerState : MonoBehaviour
     
     public bool canSprint = false;
 
+    public bool isMoving = false;
+    
     public bool isSprinting;
     
     public bool isAlive = true;
@@ -50,11 +52,9 @@ public class PlayerState : MonoBehaviour
             
             
         }
-        else if (!isSprinting && currentStamina < maxStamina)
+        else if (!isSprinting && currentStamina < maxStamina && !isMoving )
         {
             currentStamina += staminaRegenRate * Time.deltaTime;
-            
-            Debug.Log("Not sprinting");
             
         }
         
@@ -84,6 +84,11 @@ public class PlayerState : MonoBehaviour
 
     private void Respawn()
     {
+        if (respawnPoint == null)
+        {
+            respawnPoint = new GameObject().transform;
+            respawnPoint.position = new Vector3(0, 0, 0);
+        }
         characterController.enabled = false;
         transform.position = respawnPoint.position;
         characterController.enabled = true;
