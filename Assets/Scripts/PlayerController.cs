@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
 
-    public float movementSpeed = 5f;
+    public float movementSpeed = 10f;
     public float rotationSpeed = 100f;
-    public float runSpeed = 1.5f;
     public float gravity = -9.81f;
     public float groundStickForce = -5f;
+    public float sprintMultiplier = 3f;
     
     private Vector3 velocity;
 
@@ -43,15 +43,22 @@ public class PlayerController : MonoBehaviour
         if (Keyboard.current.aKey.isPressed) turnInput = -1f;
         
         bool wantsToSprint = Keyboard.current.leftShiftKey.isPressed;
-        bool canSprint = wantsToSprint && playerState.currentStamina > 0f;
+        bool canSprint = wantsToSprint && playerState.canSprint;
         
         playerState.isSprinting = canSprint;
         
         if (canSprint)
         {
-            moveInput *= runSpeed;
+            moveInput *= sprintMultiplier;
+            
         }
 
+        if (canSprint)
+        {
+            transform.Rotate(0f, turnInput * rotationSpeed * Time.deltaTime * sprintMultiplier, 0f);
+
+        }
+        
         transform.Rotate(0f, turnInput * rotationSpeed * Time.deltaTime, 0f);
         
         Vector3 movement = transform.forward * moveInput * movementSpeed;

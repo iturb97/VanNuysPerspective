@@ -11,7 +11,10 @@ public class PlayerState : MonoBehaviour
     public float currentStamina;
     public float staminaDepletionRate = 20f;
     public float staminaRegenRate = 10f;
-    public float minStamina = 20f;
+    public float minStamina = 0f;
+    public float sprintStaminaThreshold = 20f;
+    
+    public bool canSprint = false;
 
     public bool isSprinting;
     
@@ -26,20 +29,32 @@ public class PlayerState : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         currentStamina = maxStamina;
+        canSprint = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+        if (currentStamina <= minStamina)
+        {
+            canSprint = false;
+        }
+        if (currentStamina > sprintStaminaThreshold)
+        {
+            canSprint = true;
+        }
         if (isSprinting && currentStamina > minStamina)
         {
             currentStamina -= staminaDepletionRate * Time.deltaTime;
+            
             
         }
         else if (!isSprinting && currentStamina < maxStamina)
         {
             currentStamina += staminaRegenRate * Time.deltaTime;
+            
+            Debug.Log("Not sprinting");
             
         }
         
