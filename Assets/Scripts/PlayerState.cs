@@ -46,16 +46,18 @@ public class PlayerState : MonoBehaviour
         {
             canSprint = true;
         }
+        
         if (isSprinting && currentStamina > minStamina)
         {
             currentStamina -= staminaDepletionRate * Time.deltaTime;
-            
-            
         }
-        else if (!isSprinting && currentStamina < maxStamina && !isMoving )
+        else if (!isSprinting && currentStamina < maxStamina && isMoving)
+        {
+            currentStamina += staminaRegenRate * Time.deltaTime * 0.25f;
+        }
+        else if (!isSprinting && currentStamina < maxStamina && !isMoving)
         {
             currentStamina += staminaRegenRate * Time.deltaTime;
-            
         }
         
         currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);

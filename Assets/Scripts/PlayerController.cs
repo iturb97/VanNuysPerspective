@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         bool wantsToSprint = Keyboard.current.leftShiftKey.isPressed;
         bool canSprint = wantsToSprint && playerState.canSprint;
         
+        
         playerState.isSprinting = canSprint;
         
         if (canSprint)
