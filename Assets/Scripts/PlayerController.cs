@@ -51,23 +51,6 @@ public class PlayerController : MonoBehaviour
             playerState.isMoving = false;
         }
         
-        bool wantsToSprint = Keyboard.current.leftShiftKey.isPressed;
-        bool canSprint = wantsToSprint && playerState.canSprint;
-        
-        
-        playerState.isSprinting = canSprint;
-        
-        if (canSprint)
-        {
-            moveInput *= sprintMultiplier;
-            
-        }
-
-        if (canSprint)
-        {
-            transform.Rotate(0f, turnInput * rotationSpeed * Time.deltaTime * sprintMultiplier, 0f);
-
-        }
         
         transform.Rotate(0f, turnInput * rotationSpeed * Time.deltaTime, 0f);
         
@@ -76,4 +59,6 @@ public class PlayerController : MonoBehaviour
         movement.y = velocity.y;
         characterController.Move(movement * Time.deltaTime);
     }
+
+    
 }
