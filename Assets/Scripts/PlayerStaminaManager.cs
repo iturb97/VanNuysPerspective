@@ -14,7 +14,7 @@ public class PlayerStaminaManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerState = GetComponent<PlayerState>();
     }
 
     // Update is called once per frame
@@ -25,14 +25,26 @@ public class PlayerStaminaManager : MonoBehaviour
     
     public void StaminaDrain()
     {
-        currentStamina -= staminaDrainRate * Time.deltaTime;
-        if (currentStamina < minStamina) currentStamina = minStamina;
+        if (playerState.isMoving)
+        {
+            currentStamina -= staminaDrainRate * Time.deltaTime;
+            if (currentStamina < minStamina) currentStamina = minStamina;
+            
+            //Debug.Log(currentStamina);
+        }
+        
     }
 
     public void StaminaRegen()
     {
-        currentStamina += staminaRegenRate * Time.deltaTime;
-        if (currentStamina > maxStamina) currentStamina = maxStamina;
+        if (!playerState.isMoving)
+        {
+            currentStamina += staminaRegenRate * Time.deltaTime;
+            if (currentStamina > maxStamina) currentStamina = maxStamina;
+            
+            //Debug.Log(currentStamina);
+        }
+        
     }
     
     public void UpdateStamina()

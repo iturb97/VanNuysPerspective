@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
     public float rotationSpeed = 100f;
     public float gravity = -9.81f;
     public float groundStickForce = -5f;
-    public float sprintMultiplier = 1.5f;
     
     private Vector3 velocity;
 
@@ -16,11 +15,14 @@ public class PlayerController : MonoBehaviour
     
     public PlayerState playerState;
     
+    public PlayerStaminaManager staminaManager;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         playerState = GetComponent<PlayerState>();
+        staminaManager = GetComponent<PlayerStaminaManager>();
     }
 
     // Update is called once per frame
@@ -45,10 +47,13 @@ public class PlayerController : MonoBehaviour
         if (moveInput != 0f)
         {
             playerState.isMoving = true;
+            staminaManager.StaminaDrain();
+            
         }
         else
         {
             playerState.isMoving = false;
+            staminaManager.StaminaRegen();
         }
         
         
