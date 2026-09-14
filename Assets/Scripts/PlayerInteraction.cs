@@ -9,10 +9,13 @@ public class PlayerInteraction : MonoBehaviour
     public Transform cameraTransform;
     public float interactionDistance = 3f;
 
-    public Image crosshairImage;
-    public Color defaultCrosshairColor = Color.white;
-    public Color interactableCrosshairColor = Color.green;
+    public CrosshairController crosshairController;
     
+    
+    private IInteractable currentInteractable;
+    
+    
+
     void Start()
     {
         
@@ -31,42 +34,29 @@ public class PlayerInteraction : MonoBehaviour
 
     void CheckForInteractable()
     {
-        RaycastHit hit;
-        bool didHit = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interactionDistance);
-        
-        if (didHit)
+        currentInteractable = null;
+
+        if (Physics.Raycast(cameraTransform.position, cameraTransform.forward, out RaycastHit hit,
+                interactionDistance))
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            
-            if (interactable != null)
-            {
-                crosshairImage.color = interactableCrosshairColor;
-            }
-            else
-            {
-                crosshairImage.color = defaultCrosshairColor;
-            }
-            
+            currentInteractable = hit.collider.GetComponent<IInteractable>();
         }
-        else
+
+        if (currentInteractable != null)
         {
-            crosshairImage.color = defaultCrosshairColor;
+            crosshairController.SetColorInteractable();
         }
+        else crosshairController.SetColorDefault();
+
     }
 
     void TryInteract()
     {
-        RaycastHit hit;
-        bool didHit = Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, interactionDistance);
-
-        if (didHit)
+        if (currentInteractable != null)
         {
-            IInteractable interactable = hit.collider.GetComponent<IInteractable>();
-            
-            if (interactable != null)
-            {
-                interactable.Interact();
-            }
+            currentInteractable.Interact();
         }
+        else crosshairController.SetColorDefault();
+        
     }
 }
