@@ -6,6 +6,7 @@ using static UnityEngine.Debug;
 public class PlayerState : MonoBehaviour
 {
     public bool isMoving = false;
+    public bool isWalking = false;
     public bool isAlive = true;
     
     public Transform respawnPoint;
