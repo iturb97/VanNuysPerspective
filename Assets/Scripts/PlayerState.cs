@@ -8,6 +8,7 @@ public class PlayerState : MonoBehaviour
     public bool isMoving = false;
     public bool isWalking = false;
     public bool isAlive = true;
+    public bool isSprinting = false;
     
     public Transform respawnPoint;
     

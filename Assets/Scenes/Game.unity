@@ -798,6 +798,8 @@ GameObject:
   - component: {fileID: 790409077}
   - component: {fileID: 790409078}
   - component: {fileID: 790409079}
+  - component: {fileID: 790409080}
+  - component: {fileID: 790409081}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -939,12 +941,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3f5b14c511e4ad2ae36cec07b772a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  movementSpeed: 10
+  movementSpeed: 2.5
   rotationSpeed: 100
   gravity: -9.81
   groundStickForce: -5
-  sprintMultiplier: 1.5
   playerState: {fileID: 790409078}
+  staminaManager: {fileID: 0}
 --- !u!114 &790409078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -957,16 +959,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0793648c74daa405e87ed305f4236b1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerState
-  playerHealth: 100
-  maxStamina: 100
-  currentStamina: 0
-  staminaDepletionRate: 20
-  staminaRegenRate: 10
-  minStamina: 0
-  sprintStaminaThreshold: 20
-  canSprint: 0
-  isSprinting: 0
+  isMoving: 0
+  isWalking: 0
   isAlive: 1
+  isSprinting: 0
   respawnPoint: {fileID: 2095410793}
 --- !u!114 &790409079
 MonoBehaviour:
@@ -982,9 +978,39 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
   cameraTransform: {fileID: 330585546}
   interactionDistance: 3
-  crosshairImage: {fileID: 1945002583}
-  defaultCrosshairColor: {r: 1, g: 1, b: 1, a: 1}
-  interactableCrosshairColor: {r: 0, g: 1, b: 0, a: 1}
+  crosshairController: {fileID: 1945002585}
+--- !u!114 &790409080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790409071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89de00244155a4b1f94aef67030fff90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStaminaManager
+  playerState: {fileID: 0}
+  currentStamina: 100
+  maxStamina: 100
+  staminaRegenRate: 10
+  staminaDrainRate: 20
+  minStamina: 0
+--- !u!114 &790409081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790409071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c2cd58f870374e95867216ef445b7d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSprint
+  sprintSpeedMultiplier: 1.5
+  playerState: {fileID: 790409078}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1798,7 +1824,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbcd9498f033c4a51a80e78bf8dbd97c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CrosshairController
-  crosshairImage: {fileID: 0}
+  defaultCrosshairColor: {r: 1, g: 1, b: 1, a: 1}
+  interactableCrosshairColor: {r: 0, g: 1, b: 0, a: 1}
+  crosshairImage: {fileID: 1945002583}
 --- !u!1 &2095410792
 GameObject:
   m_ObjectHideFlags: 0
