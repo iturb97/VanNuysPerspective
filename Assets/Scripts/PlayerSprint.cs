@@ -14,6 +14,7 @@ public class PlayerSprint : MonoBehaviour
     void Start()
     {
         playerState = GetComponent<PlayerState>();
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -21,12 +22,15 @@ public class PlayerSprint : MonoBehaviour
     {
         if (playerState.isSprinting)
         {
-            playerController.movementSpeed *= sprintSpeedMultiplier;
+            playerController.movementSpeed = playerController.maxMovementSpeed * sprintSpeedMultiplier;
+            playerController.rotationSpeed = playerController.maxRotationSpeed * sprintSpeedMultiplier;
         }
-    }
-
-    public void PlayerSprint()
-    {
+        else
+        {
+            playerController.movementSpeed = playerController.maxMovementSpeed;
+            playerController.rotationSpeed = playerController.maxRotationSpeed;
+        }
         
     }
+    
 }

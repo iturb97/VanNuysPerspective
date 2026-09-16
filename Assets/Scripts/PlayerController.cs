@@ -5,7 +5,10 @@ public class PlayerController : MonoBehaviour
 {
 
     public float movementSpeed = 2.5f;
+    public float maxMovementSpeed = 2.5f;
     public float rotationSpeed = 100f;
+
+    public float maxRotationSpeed = 100f;
     public float gravity = -9.81f;
     public float groundStickForce = -5f;
     
@@ -43,6 +46,17 @@ public class PlayerController : MonoBehaviour
         
         if (Keyboard.current.dKey.isPressed) turnInput = 1f;
         if (Keyboard.current.aKey.isPressed) turnInput = -1f;
+        
+        if (Keyboard.current.leftShiftKey.isPressed)
+        {
+            playerState.isSprinting = true;
+            //Debug.Log("Sprinting");
+        }
+        else
+        {
+            playerState.isSprinting = false;
+            //Debug.Log("Not sprinting");
+        }
         
         if (moveInput != 0f)
         {
