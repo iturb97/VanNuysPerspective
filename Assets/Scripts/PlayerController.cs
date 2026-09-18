@@ -17,15 +17,12 @@ public class PlayerController : MonoBehaviour
     private CharacterController characterController;
     
     public PlayerState playerState;
-    
-    public PlayerStaminaManager staminaManager;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         characterController = GetComponent<CharacterController>();
         playerState = GetComponent<PlayerState>();
-        staminaManager = GetComponent<PlayerStaminaManager>();
     }
 
     // Update is called once per frame
@@ -47,30 +44,8 @@ public class PlayerController : MonoBehaviour
         if (Keyboard.current.dKey.isPressed) turnInput = 1f;
         if (Keyboard.current.aKey.isPressed) turnInput = -1f;
         
-        if (Keyboard.current.leftShiftKey.isPressed)
-        {
-            playerState.isSprinting = true;
-            //Debug.Log("Sprinting");
-        }
-        else
-        {
-            playerState.isSprinting = false;
-            //Debug.Log("Not sprinting");
-        }
-        
-        if (moveInput != 0f)
-        {
-            playerState.isMoving = true;
-            staminaManager.StaminaDrain();
-            
-        }
-        else
-        {
-            playerState.isMoving = false;
-            staminaManager.StaminaRegen();
-        }
-        
-        
+        playerState.isMoving = moveInput != 0f;
+
         transform.Rotate(0f, turnInput * rotationSpeed * Time.deltaTime, 0f);
         
         Vector3 movement = transform.forward * moveInput * movementSpeed;

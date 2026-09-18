@@ -23,11 +23,7 @@ public class CameraController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         
-        if (Keyboard.current.escapeKey.wasPressedThisFrame)
-        {
-            Cursor.visible = true;
-            Cursor.lockState = CursorLockMode.None;
-        }
+        
         
     }
 
@@ -60,6 +56,12 @@ public class CameraController : MonoBehaviour
             xRotation = Mathf.Lerp(xRotation, 0, Time.deltaTime * returnSpeed);
             yRotation = Mathf.Lerp(yRotation, 0, Time.deltaTime * returnSpeed);
             transform.localRotation = Quaternion.Euler(yRotation, xRotation, 0f);
+        }
+        
+        if (Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
         }
         
     }
