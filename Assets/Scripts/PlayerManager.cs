@@ -38,8 +38,10 @@ public class PlayerManager : MonoBehaviour
         playerState.isSprinting = wantsToSprint && playerState.isMoving && !sprintLocked;
 
         if (playerState.isSprinting) staminaManager.Drain(sprintDrainRate);
-        else if (playerState.isMoving) staminaManager.Drain(staminaManager.staminaDrainRate);
-        else staminaManager.Regen(staminaManager.staminaRegenRate);
+        //else if (playerState.isMoving) staminaManager.Drain(staminaManager.staminaDrainRate);
+        else if (!playerState.isMoving) staminaManager.Regen(staminaManager.staminaRegenRate);
+        
+        
     }
 
     private void OnTriggerEnter(Collider other)

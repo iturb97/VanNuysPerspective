@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerSprint : MonoBehaviour
 {
-    public float sprintSpeedMultiplier = 1.5f;
+    public float sprintSpeedMultiplier = 3.0f;
 
     public PlayerState playerState;
 
@@ -24,11 +24,13 @@ public class PlayerSprint : MonoBehaviour
         {
             playerController.movementSpeed = playerController.maxMovementSpeed * sprintSpeedMultiplier;
             playerController.rotationSpeed = playerController.maxRotationSpeed * sprintSpeedMultiplier;
+            //Debug.Log("Sprinting");
         }
         else
         {
             playerController.movementSpeed = playerController.maxMovementSpeed;
             playerController.rotationSpeed = playerController.maxRotationSpeed;
+            //Debug.Log("Not sprinting");
         }
         
     }
