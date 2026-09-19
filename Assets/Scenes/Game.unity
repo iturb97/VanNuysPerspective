@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -274,6 +275,26 @@ MonoBehaviour:
   maximumYLookAngle: 60
   minimumXLookAngle: -90
   maximumXLookAngle: 90
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce14d8f663aa4bcaa3f54b76922af8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CameraBobbing
+  playerState: {fileID: 790409078}
+  camera: {fileID: 330585545}
+  walkFrequency: 12
+  sprintFrequency: 18
+  walkAmplitude: 0.04
+  sprintAmplitude: 0.07
+  cameraReturnSpeed: 2
+  bobTimer: 0
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,6 +985,7 @@ MonoBehaviour:
   isMoving: 0
   isAlive: 1
   isSprinting: 0
+  isGrounded: 1
 --- !u!114 &790409079
 MonoBehaviour:
   m_ObjectHideFlags: 0

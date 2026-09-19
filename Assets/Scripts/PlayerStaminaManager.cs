@@ -16,12 +16,12 @@ public class PlayerStaminaManager : MonoBehaviour
     public void Drain(float rate)
     {
         currentStamina = Mathf.Max(currentStamina - rate * Time.deltaTime, minStamina);
-        Debug.Log("current stamina: " + currentStamina);
+        //Debug.Log("current stamina: " + currentStamina);
     }
 
     public void Regen(float rate)
     {
         currentStamina = Mathf.Min(currentStamina + rate * Time.deltaTime, maxStamina);
-        Debug.Log("current stamina: " + currentStamina);
+        //Debug.Log("current stamina: " + currentStamina);
     }
 }
