@@ -37,9 +37,12 @@ public class CameraBobbing : MonoBehaviour
         {
             if (playerState.isSprinting)
             {
+                
+            }
+            else
+            {
                 camera.transform.localPosition(new Vector3(0.0f, Mathf.Sin(Time.time * bobbingSpeed) * bobbingAmount + bobbingOffset, 0.0f));
             }
-            camera.transform.localPosition(new Vector3(0.0f, Mathf.Sin(Time.time * bobbingSpeedSprint) * bobbingAmount + bobbingOffset, 0.0f));
         }
     }
 }
