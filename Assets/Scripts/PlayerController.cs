@@ -54,5 +54,10 @@ public class PlayerController : MonoBehaviour
         characterController.Move(movement * Time.deltaTime);
     }
 
+    public void ResetVelocity()
+    {
+        velocity = Vector3.zero;
+    }
+
     
 }
