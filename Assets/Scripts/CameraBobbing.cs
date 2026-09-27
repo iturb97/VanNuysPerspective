@@ -7,7 +7,7 @@ public class CameraBobbing : MonoBehaviour
     
     
     public PlayerState playerState;
-    public Camera camera;
+    public Camera targetCamera;
 
     public float walkFrequency = 12f;
     public float sprintFrequency = 18f;
@@ -23,14 +23,14 @@ public class CameraBobbing : MonoBehaviour
     
     void Start()
     {
-        camera = GetComponent<Camera>();
+        targetCamera = GetComponent<Camera>();
         
         if (playerState == null)
         {
             playerState = GetComponentInParent<PlayerState>();
-            resetPosition = camera.transform.localPosition;
+            
         }
-        
+        resetPosition = targetCamera.transform.localPosition;
         
     }
 
@@ -43,7 +43,7 @@ public class CameraBobbing : MonoBehaviour
     
     public void CameraBob()
     {
-        if (playerState == null || camera == null) return;
+        if (playerState == null || targetCamera == null) return;
         if (playerState.isMoving && playerState.isAlive)
         {
             float frequency;

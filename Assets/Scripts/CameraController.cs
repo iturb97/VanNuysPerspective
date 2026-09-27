@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class CameraController : MonoBehaviour
 {
-    public float mouseSensitivity = 200f;
+    public float mouseSensitivity = 0.15f;
 
     public float minimumYLookAngle = -60f;
     public float maximumYLookAngle = 60f;
@@ -37,8 +37,8 @@ public class CameraController : MonoBehaviour
             
             Vector2 mouseInput = Mouse.current.delta.ReadValue();
         
-            xRotation += mouseInput.x * mouseSensitivity * Time.deltaTime;
-            yRotation -= mouseInput.y * mouseSensitivity * Time.deltaTime;
+            xRotation += mouseInput.x * mouseSensitivity;
+            yRotation -= mouseInput.y * mouseSensitivity;
         
             xRotation = Mathf.Clamp(xRotation, minimumXLookAngle, maximumXLookAngle);
             yRotation = Mathf.Clamp(yRotation, minimumYLookAngle, maximumYLookAngle);

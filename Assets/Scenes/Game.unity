@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1ef6d80560134c85a2af70cbace0848, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
-  mouseSensitivity: 200
+  mouseSensitivity: 0.3
   minimumYLookAngle: -60
   maximumYLookAngle: 60
   minimumXLookAngle: -90
