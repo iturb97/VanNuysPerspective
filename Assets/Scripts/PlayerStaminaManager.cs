@@ -7,6 +7,7 @@ public class PlayerStaminaManager : MonoBehaviour
     public float staminaRegenRate = 10f;
     public float staminaDrainRate = 20f;
     public float minStamina = 0f;
+    public float sprintStaminaCost = 35f;
 
     void Start()
     {

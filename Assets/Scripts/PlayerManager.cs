@@ -28,19 +28,6 @@ public class PlayerManager : MonoBehaviour
     void Update()
     {
         if (!playerState.isAlive) return;
-
-        // Locking until stamina climbs back to the threshold stops sprint from
-        // re-engaging for a frame at a time once the bar bottoms out.
-        if (staminaManager.currentStamina <= staminaManager.minStamina) sprintLocked = true;
-        else if (staminaManager.currentStamina >= sprintRecoveryThreshold) sprintLocked = false;
-
-        bool wantsToSprint = Keyboard.current.leftShiftKey.isPressed;
-        playerState.isSprinting = wantsToSprint && playerState.isMoving && !sprintLocked;
-
-        if (playerState.isSprinting) staminaManager.Drain(sprintDrainRate);
-        //else if (playerState.isMoving) staminaManager.Drain(staminaManager.staminaDrainRate);
-        else if (!playerState.isMoving) staminaManager.Regen(staminaManager.staminaRegenRate);
-        
         
     }
 

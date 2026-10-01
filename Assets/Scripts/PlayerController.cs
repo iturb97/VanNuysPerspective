@@ -16,7 +16,10 @@ public class PlayerController : MonoBehaviour
     
     private Vector3 velocity;
 
+    private bool sprintLocked;
+
     private CharacterController characterController;
+    private PlayerStaminaManager playerStaminaManager;
     
     public PlayerState playerState;
 
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
     {
         characterController = GetComponent<CharacterController>();
         playerState = GetComponent<PlayerState>();
+        playerStaminaManager = GetComponent<PlayerStaminaManager>();
         
     }
 
@@ -75,6 +79,34 @@ public class PlayerController : MonoBehaviour
         else
         {
             movementSpeed = baseMovementSpeed;
+        }
+    }
+
+    public void Sprint()
+    {
+        if (playerStaminaManager.currentStamina <= playerStaminaManager.minStamina)
+        {
+            sprintLocked = true;
+        }
+        else if (playerStaminaManager.currentStamina <= playerStaminaManager.sprintStaminaCost)
+        {
+            sprintLocked = true;
+        }
+        else if (playerStaminaManager.currentStamina >= playerStaminaManager.sprintStaminaCost)
+        {
+            sprintLocked = false;
+        }
+        
+        bool wantsToSprint = Keyboard.current.leftShiftKey.isPressed;
+        playerState.isSprinting = wantsToSprint && playerState.isMoving && !sprintLocked;
+
+        if (playerState.isSprinting)
+        {
+            playerStaminaManager.Drain(playerStaminaManager.sprintStaminaCost);
+        }
+        else if (!playerState.isMoving)
+        {
+            playerStaminaManager.Regen(playerStaminaManager.staminaRegenRate);
         }
     }
 
